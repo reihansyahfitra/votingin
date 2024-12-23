@@ -1,0 +1,22 @@
+# Contract deployment data
+contract-bytecode.js
+
+# IDE files
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Build artifacts
+dist/
+build/
+
+# Logs
+*.log
+
+# Cache
+.cache/
