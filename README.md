@@ -1,5 +1,14 @@
 # Votingin - Blockchain-based Voting System
 
+## Made by [Raja Kripto]
+
+- Reihan Syahfitra Wirawan (1303210088)
+- Nicholas Efesus Barus (1303210179)
+- Ghazy Fathin Febozsa (1303210093)
+- Ahmad Dzaky Ar Razi (1303210165)
+- Aradea Putra Dwi (1303213049)
+- Ardhi Alfatah (1303210156)
+
 ## Overview
 
 A decentralized voting application built on Ethereum blockchain that allows creating and managing secure voting sessions.
