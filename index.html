@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Votingin.id - Sistem Pemilu Berbasis Rantai Blok</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.4/ethers.umd.min.js" integrity="sha512-V3xRGsQMQ8CG4l2gVN44TCDmNY5cdlxbSvejrgmWxcLKHft0Q3XQDbeuJ9aot14mpNuRWGtI//WKraedDGNZ+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <div class="container mx-auto px-4 py-8 max-w-2xl flex-grow">
+        <h1 class="text-4xl font-bold text-center mb-8 text-gray-800">Votingin.id</h1>
+        
+        <div class="space-y-4">
+            <!-- Direct Access -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Akses Langsung</h2>
+                <form onsubmit="accessByAddress(event)" class="flex gap-2">
+                    <input type="text" id="contractAddress" required
+                        placeholder="Masukkan alamat kontrak"
+                        class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors">
+                        Akses
+                    </button>
+                </form>
+            </div>
+
+            <!-- Recent Sessions -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Terakhir Diakses</h2>
+                    <button onclick="clearRecent()" 
+                        class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md transition-colors">
+                        <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M18 6V16.2C18 17.8802 18 18.7202 17.673 19.362C17.3854 19.9265 16.9265 20.3854 16.362 20.673C15.7202 21 14.8802 21 13.2 21H10.8C9.11984 21 8.27976 21 7.63803 20.673C7.07354 20.3854 6.6146 19.9265 6.32698 19.362C6 18.7202 6 17.8802 6 16.2V6M14 10V17M10 10V17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <hr class="border-gray-400 border-b mb-4">
+                <div id="recentList" class="space-y-3">
+                    <!-- Recent sessions will be listed here -->
+                </div>
+            </div>
+
+            <!-- Created Sessions -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Sesi yang Dibuat</h2>
+                    <div class="flex gap-2">
+                        <button onclick="clearSessions()" 
+                            class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md transition-colors">
+                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M18 6V16.2C18 17.8802 18 18.7202 17.673 19.362C17.3854 19.9265 16.9265 20.3854 16.362 20.673C15.7202 21 14.8802 21 13.2 21H10.8C9.11984 21 8.27976 21 7.63803 20.673C7.07354 20.3854 6.6146 19.9265 6.32698 19.362C6 18.7202 6 17.8802 6 16.2V6M14 10V17M10 10V17" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <button onclick="window.location.href='create-session.html'" 
+                            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md transition-colors">
+                            + Buat Sesi Baru
+                        </button>
+                    </div>
+                </div>
+                <hr class="border-gray-400 border-b mb-4">
+                <div id="sessionList" class="space-y-3">
+                    <!-- Created sessions will be listed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="w-full bg-white shadow-md mt-8">
+        <div class="container mx-auto px-4 py-4">
+            <p class="text-center text-gray-600 text-sm">
+                Created by 
+                <span class="font-semibold text-blue-600">Raja Kripto</span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="welcome.js"></script>
+</body>
+</html>

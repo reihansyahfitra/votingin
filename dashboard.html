@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistem Pemilu Berbasis Rantai Blok</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.4/ethers.umd.min.js" integrity="sha512-V3xRGsQMQ8CG4l2gVN44TCDmNY5cdlxbSvejrgmWxcLKHft0Q3XQDbeuJ9aot14mpNuRWGtI//WKraedDGNZ+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <!-- Back Button -->
+    <div class="fixed top-4 left-4">
+        <a href="index.html" 
+           class="inline-flex items-center px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-md transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            Kembali
+        </a>
+    </div>
+
+    <div id="app" class="container mx-auto px-4 py-8 max-w-2xl flex-grow">
+        <h1 id="sessionTitle" class="text-4xl font-bold text-center mb-8 text-gray-800">
+            Memuat nama sesi...
+        </h1>
+        
+        <!-- Voter Info Card -->
+        <div id="currentVoter" class="bg-white rounded-lg shadow-md p-4 mb-8">
+            <div class="flex justify-between items-center">
+                <div class="text-gray-600">
+                    Akun yang digunakan: 
+                    <span id="voterAddress" class="font-mono text-sm">-</span>
+                </div>
+                <button onclick="switchAccount()" 
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors">
+                    Ganti Akun
+                </button>
+            </div>
+        </div>
+
+        <!-- Dynamic Voting Options -->
+        <div id="candidatesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Cards will be generated here -->
+        </div>
+        
+        <!-- Result Message -->
+        <div id="result" class="mt-8 text-center text-gray-700"></div>
+    </div>
+    <!-- Footer -->
+    <footer class="w-full bg-white shadow-md mt-8">
+        <div class="container mx-auto px-4 py-4">
+            <p class="text-center text-gray-600 text-sm">
+                Created by 
+                <span class="font-semibold text-blue-600">Raja Kripto</span>
+            </p>
+        </div>
+    </footer>
+    <script src="app.js"></script>
+</body>
+</html>
